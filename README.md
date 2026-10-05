@@ -26,29 +26,41 @@ It wrote the code, ran away, and now the game is unplayable.
 ## 📝 Document Your Experience
 
 - [ ] Describe the game's purpose.
+   - Game Glitch Investigator is a Streamlit number-guessing game where the player guesses a secret number within a difficulty-based range and attempt limit, receiving "Too High"/"Too Low" hints and a score until they win or run out of attempts.
 - [ ] Detail which bugs you found.
+   - We (me and Claude) found several bugs: check_guess compared the guess to the secret lexically as strings instead of numerically (causing wrong high/low hints when the secret was a string), the New Game button only reset attempts and secret while leaving score, status, and history stale — which also meant a finished game's leftover status would immediately re-trigger the game-over screen — and update_score applies an inconsistent parity-based bonus/penalty on "Too High" guesses. 
 - [ ] Explain what fixes you applied.
+   - We fixed the check_guess comparison by coercing secret to int, fixed New Game to reset all five session-state fields using the difficulty-aware range, and changed the initial attempts count from 1 to 0; the update_score parity issue was identified but intentionally left unfixed for now.
 
 ## 📸 Demo Walkthrough
 
 Describe your fixed game in numbered steps so a reader can follow along without watching a video:
 
-1. <!-- Describe this step -->
-2. <!-- Describe this step -->
-3. <!-- Describe this step -->
-4. <!-- Describe this step -->
-5. <!-- Add more steps as needed -->
+## Demo Walkthrough
+1. User enters a guess of 0.
+2. Game returns "📈 Go HIGHER!"
+3. User enters a guess of 101, and the game shows "📉 Go LOWER!"
+4. Open Developer Debug info and view it.
+5. Click New Game button.
+6. Check if all fields other than secret are cleared.
+7. Enter the secret number and hit the Submit Guess button.
+8. Game should return 🎉 Correct! and on a new line, "You won! The secret was ___. Final score: ___.
 
-**Screenshot** *(optional)*: <!-- Insert a screenshot of your fixed, winning game here -->
+**Demo Screenshot**: ![Demo Screenshot](demo.png)
+ <!-- Insert a screenshot of your fixed, winning game here -->
 
 ## 🧪 Test Results
 
 ```
-# Paste your pytest output here, e.g.:
-# pytest tests/
-# ========================= X passed in 0.XXs =========================
+tests/test_game_logic.py::test_winning_guess PASSED                      [ 20%]
+tests/test_game_logic.py::test_guess_too_high PASSED                     [ 40%]
+tests/test_game_logic.py::test_guess_too_low PASSED                      [ 60%]
+tests/test_game_logic.py::test_guess_too_high_with_string_secret PASSED  [ 80%]
+tests/test_game_logic.py::test_guess_too_low_with_string_secret PASSED   [100%]
+
+============================== 5 passed in 0.01s ===============================
 ```
 
 ## 🚀 Stretch Features
 
-- [ ] [If you choose to complete Challenge 4, describe the Enhanced UI changes here — a screenshot is optional]
+- [ ] N/A

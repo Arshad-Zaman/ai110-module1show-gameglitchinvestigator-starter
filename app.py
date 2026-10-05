@@ -72,10 +72,11 @@ with col2:
 with col3:
     show_hint = st.checkbox("Show hint", value=True)
 
-"""FIX: The button wasn't correctly resetting attempts and other fields so I asked Claude to
-investigate and report to me what was wrong for the new game button and suggest the fixes.
-I reviewed the suggestion approved it and also asked it to fix where the game was starting with
-1 attempt already being made."""
+# FIX: The button wasn't correctly resetting attempts and other fields so I asked Claude to
+# investigate and report to me what was wrong for the new game button and suggest the fixes.
+# I reviewed the suggestion approved it and also asked it to fix where the game was starting with
+# 1 attempt already being made.
+
 if new_game:
     st.session_state.attempts = 0
     st.session_state.secret = random.randint(low, high)

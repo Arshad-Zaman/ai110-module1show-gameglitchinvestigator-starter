@@ -29,7 +29,7 @@ Things I found broken:
 - List at least two concrete bugs you noticed at the start  
   (for example: "the hints were backwards").
 
-  1. The hints were backwwards.
+  1. The hints were backwards.
 
   2. The game started with you having attempted a guess.
 
@@ -69,6 +69,7 @@ Document at least 3 bugs you found. Add rows as needed.
 ## 4. What did you learn about Streamlit and state?
 
 - How would you explain Streamlit "reruns" and session state to a friend who has never used Streamlit?
+  - Streamlit reruns your entire code from top to bottom everytime you interact with the UI so every variable gets re-initialized. Session state (st.session_state) is the workaround which stores the user's input in a dictionary. Finally, to reset the session state, you have to do so explicitly by making an interactable UI element in my case it was the new game button.
 
 ---
 
@@ -76,5 +77,8 @@ Document at least 3 bugs you found. Add rows as needed.
 
 - What is one habit or strategy from this project that you want to reuse in future labs or projects?
   - This could be a testing habit, a prompting strategy, or a way you used Git.
+    - Never to blindly accept a proposed solution by AI agents and always to verify and test those suggestions before accepting them.
 - What is one thing you would do differently next time you work with AI on a coding task?
+  - I would treat the AI agent as a colleague and bounce back ideas with it.
 - In one or two sentences, describe how this project changed the way you think about AI generated code.
+  - AI generated code is a powerful solution but it needs to reviewed and tested. To get good solutions, you have to give enough context and prompt the agent well.
